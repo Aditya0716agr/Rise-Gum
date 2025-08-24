@@ -262,7 +262,7 @@ const RiseGumLanding = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {productBenefits.map((benefit, index) => (
+            {content.productBenefits.map((benefit, index) => (
               <Card key={benefit.id} className={`product-card text-center scale-in animate-delay-${(index + 1) * 200}`}>
                 <CardContent className="p-8">
                   <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-green-400 to-green-600 rounded-2xl flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110">
