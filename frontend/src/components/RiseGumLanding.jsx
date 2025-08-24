@@ -155,29 +155,34 @@ const RiseGumLanding = () => {
       </section>
 
       {/* Problem Section */}
-      <section id="problem" className="py-20 px-6" style={{ backgroundColor: 'var(--bg-section)' }}>
+      <section id="problem" className="py-24 px-6" style={{ backgroundColor: 'var(--bg-section)' }}>
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="heading-2 mb-4">
-            90% of energy comes from unhealthy drinks
-          </h2>
-          <p className="body-large mb-12" style={{ color: 'var(--text-secondary)' }}>
-            We're changing that.
-          </p>
+          <div className="slide-in-up">
+            <h2 className="heading-2 mb-4">
+              90% of energy comes from unhealthy drinks
+            </h2>
+            <p className="body-large mb-16" style={{ color: 'var(--text-secondary)' }}>
+              We're changing that.
+            </p>
+          </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {problemPoints.map((point) => (
-              <Card key={point.id} className={`product-card text-center ${
+            {problemPoints.map((point, index) => (
+              <Card key={point.id} className={`product-card text-center slide-in-up animate-delay-${(index + 1) * 100} ${
                 point.type === 'problem' ? 'border-red-200 bg-red-50' :
                 point.type === 'solution' ? 'border-green-200 bg-green-50' : ''
               }`}>
-                <CardContent className="p-6">
-                  <div className={`w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center ${
-                    point.type === 'problem' ? 'bg-red-100' :
-                    point.type === 'solution' ? 'bg-green-100' : 'bg-gray-100'
+                <CardContent className="p-8">
+                  <div className={`w-20 h-20 mx-auto mb-6 rounded-2xl flex items-center justify-center transition-transform duration-300 hover:scale-110 ${
+                    point.type === 'problem' ? 'bg-gradient-to-br from-red-400 to-red-600' :
+                    point.type === 'solution' ? 'bg-gradient-to-br from-green-400 to-green-600' : 
+                    'bg-gradient-to-br from-gray-400 to-gray-600'
                   }`}>
-                    {getIcon(point.icon)}
+                    <div className="text-white">
+                      {getIcon(point.icon)}
+                    </div>
                   </div>
-                  <h3 className="heading-3 mb-2">{point.title}</h3>
+                  <h3 className="heading-3 mb-3">{point.title}</h3>
                   <p className="body-small">{point.description}</p>
                 </CardContent>
               </Card>
