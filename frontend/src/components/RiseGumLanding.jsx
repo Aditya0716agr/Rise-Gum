@@ -225,7 +225,7 @@ const RiseGumLanding = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {problemPoints.map((point, index) => (
+            {content.problemPoints.map((point, index) => (
               <Card key={point.id} className={`product-card text-center slide-in-up animate-delay-${(index + 1) * 100} ${
                 point.type === 'problem' ? 'border-red-200 bg-red-50' :
                 point.type === 'solution' ? 'border-green-200 bg-green-50' : ''
