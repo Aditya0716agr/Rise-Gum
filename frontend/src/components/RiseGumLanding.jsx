@@ -368,61 +368,75 @@ const RiseGumLanding = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 border-t" style={{ borderColor: 'var(--border-light)' }}>
+      <footer className="py-16 px-6 border-t" style={{ borderColor: 'var(--border-light)' }}>
         <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
             {/* Brand */}
-            <div>
-              <div className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">R</span>
+            <div className="fade-in">
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-2xl flex items-center justify-center shadow-md">
+                  <span className="text-white font-bold text-lg">R</span>
                 </div>
-                <span className="font-bold text-xl" style={{ color: 'var(--text-primary)' }}>Rise Gum</span>
+                <span className="font-bold text-2xl" style={{ color: 'var(--text-primary)' }}>Rise Gum</span>
               </div>
-              <p className="body-small">{contactInfo.address}</p>
+              <p className="body-medium mb-4">{contactInfo.address}</p>
+              <p className="body-small" style={{ color: 'var(--text-muted)' }}>
+                Revolutionizing energy consumption across India, one campus at a time.
+              </p>
             </div>
 
             {/* Contact */}
-            <div>
-              <h4 className="font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>
+            <div className="fade-in animate-delay-200">
+              <h4 className="font-semibold text-lg mb-6" style={{ color: 'var(--text-primary)' }}>
                 Contact
               </h4>
-              <div className="space-y-2">
-                <div className="flex items-center space-x-2">
-                  <Mail className="w-4 h-4" style={{ color: 'var(--text-muted)' }} />
+              <div className="space-y-4">
+                <div className="flex items-center space-x-3 hover:text-green-600 transition-colors duration-200">
+                  <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                    <Mail className="w-4 h-4 text-green-600" />
+                  </div>
                   <span className="body-small">{contactInfo.email}</span>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <Phone className="w-4 h-4" style={{ color: 'var(--text-muted)' }} />
+                <div className="flex items-center space-x-3 hover:text-green-600 transition-colors duration-200">
+                  <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                    <Phone className="w-4 h-4 text-green-600" />
+                  </div>
                   <span className="body-small">{contactInfo.phone}</span>
                 </div>
               </div>
             </div>
 
             {/* Social */}
-            <div>
-              <h4 className="font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>
+            <div className="fade-in animate-delay-300">
+              <h4 className="font-semibold text-lg mb-6" style={{ color: 'var(--text-primary)' }}>
                 Follow Us
               </h4>
-              <div className="flex space-x-4">
-                {socialLinks.map((link) => (
+              <div className="flex space-x-3">
+                {socialLinks.map((link, index) => (
                   <a
                     key={link.platform}
                     href={link.url}
-                    className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-green-100 transition-colors"
+                    className="w-12 h-12 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center hover:from-green-400 hover:to-green-600 hover:text-white transition-all duration-300 hover:scale-110 hover:shadow-lg"
+                    style={{ animationDelay: `${index * 0.1}s` }}
                   >
                     {getIcon(link.icon)}
                   </a>
                 ))}
               </div>
+              <p className="body-small mt-4" style={{ color: 'var(--text-muted)' }}>
+                Stay updated with our launch progress
+              </p>
             </div>
           </div>
 
-          <Separator className="mb-6" />
+          <Separator className="mb-8" />
 
-          <div className="text-center">
-            <p className="body-small">
+          <div className="text-center fade-in animate-delay-400">
+            <p className="body-small mb-2">
               © 2024 Rise Gum. All rights reserved. Made with ❤️ in India.
+            </p>
+            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+              Empowering India's next generation with clean, sustainable energy.
             </p>
           </div>
         </div>
