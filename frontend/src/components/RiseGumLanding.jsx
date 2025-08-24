@@ -437,7 +437,7 @@ const RiseGumLanding = () => {
                 </div>
                 <span className="font-bold text-2xl" style={{ color: 'var(--text-primary)' }}>Rise Gum</span>
               </div>
-              <p className="body-medium mb-4">{contactInfo.address}</p>
+              <p className="body-medium mb-4">{content.contactInfo.address}</p>
               <p className="body-small" style={{ color: 'var(--text-muted)' }}>
                 Revolutionizing energy consumption across India, one campus at a time.
               </p>
