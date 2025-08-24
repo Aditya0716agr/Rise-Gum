@@ -93,7 +93,7 @@ class ContentResponse(BaseModel):
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "Rise Gum API - Ready to energize India!"}
 
 @api_router.post("/status", response_model=StatusCheck)
 async def create_status_check(input: StatusCheckCreate):
@@ -106,6 +106,188 @@ async def create_status_check(input: StatusCheckCreate):
 async def get_status_checks():
     status_checks = await db.status_checks.find().to_list(1000)
     return [StatusCheck(**status_check) for status_check in status_checks]
+
+# Rise Gum Waitlist Endpoints
+@api_router.post("/waitlist", response_model=WaitlistResponse)
+async def add_to_waitlist(entry: WaitlistEntryCreate):
+    try:
+        # Check if email already exists
+        existing_entry = await db.waitlist_entries.find_one({"email": entry.email.lower()})
+        if existing_entry:
+            raise HTTPException(
+                status_code=409, 
+                detail="Email already registered in waitlist"
+            )
+        
+        # Create new waitlist entry
+        waitlist_data = {
+            "name": entry.name,
+            "email": entry.email.lower(),
+            "city": entry.city,
+            "timestamp": datetime.utcnow(),
+            "status": "pending",
+            "source": "landing_page"
+        }
+        
+        # Insert into database
+        result = await db.waitlist_entries.insert_one(waitlist_data)
+        
+        # Prepare response
+        waitlist_entry = WaitlistEntry(
+            id=str(result.inserted_id),
+            **waitlist_data
+        )
+        
+        logger.info(f"New waitlist entry: {entry.email} from {entry.city}")
+        
+        return WaitlistResponse(
+            success=True,
+            data=waitlist_entry,
+            message="Successfully added to waitlist! We'll notify you when Rise Gum launches."
+        )
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error adding waitlist entry: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail="Internal server error. Please try again later."
+        )
+
+@api_router.get("/waitlist", response_model=WaitlistListResponse)
+async def get_waitlist_entries(skip: int = 0, limit: int = 100):
+    try:
+        # Get total count
+        total_count = await db.waitlist_entries.count_documents({})
+        
+        # Get entries with pagination
+        cursor = db.waitlist_entries.find({}).sort("timestamp", -1).skip(skip).limit(limit)
+        entries = await cursor.to_list(length=limit)
+        
+        # Convert to response format
+        waitlist_entries = []
+        for entry in entries:
+            waitlist_entry = WaitlistEntry(
+                id=str(entry["_id"]),
+                name=entry["name"],
+                email=entry["email"],
+                city=entry["city"],
+                timestamp=entry["timestamp"],
+                status=entry.get("status", "pending"),
+                source=entry.get("source", "landing_page")
+            )
+            waitlist_entries.append(waitlist_entry)
+        
+        return WaitlistListResponse(
+            success=True,
+            data=waitlist_entries,
+            count=total_count
+        )
+        
+    except Exception as e:
+        logger.error(f"Error fetching waitlist entries: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail="Internal server error"
+        )
+
+@api_router.get("/content", response_model=ContentResponse)
+async def get_static_content():
+    """Serve static content for the landing page"""
+    content_data = {
+        "testimonials": [
+            {
+                "id": 1,
+                "name": "Arjun Sharma",
+                "role": "Engineering Student, IIT Delhi",
+                "city": "Delhi",
+                "quote": "Finally, energy without the sugar crash! Perfect for those late-night study sessions.",
+                "rating": 5
+            },
+            {
+                "id": 2,
+                "name": "Priya Patel",
+                "role": "Medical Student",
+                "city": "Mumbai", 
+                "quote": "As a med student, I need clean energy. Rise Gum is a game-changer!",
+                "rating": 5
+            },
+            {
+                "id": 3,
+                "name": "Rohan Gupta",
+                "role": "Software Developer",
+                "city": "Bangalore",
+                "quote": "Convenient and effective. No more coffee stains on my laptop!",
+                "rating": 5
+            }
+        ],
+        "socialProofStats": {
+            "interestedStudents": 1247,
+            "universities": 15,
+            "cities": 8,
+            "growthRate": "+12% weekly"
+        },
+        "productBenefits": [
+            {
+                "id": 1,
+                "title": "Sugar-Free & Healthy",
+                "description": "Zero sugar, zero calories. All the energy, none of the crash.",
+                "icon": "Heart"
+            },
+            {
+                "id": 2,
+                "title": "Pocket-Sized Convenience", 
+                "description": "Fits anywhere. Perfect for exams, meetings, or long commutes.",
+                "icon": "Zap"
+            },
+            {
+                "id": 3,
+                "title": "Fast-Acting Energy",
+                "description": "Energy in seconds, not minutes. Powered by natural caffeine.",
+                "icon": "Clock"
+            }
+        ],
+        "problemPoints": [
+            {
+                "id": 1,
+                "title": "Sugary Energy Drinks",
+                "description": "High sugar, crashes, unhealthy",
+                "icon": "X",
+                "type": "problem"
+            },
+            {
+                "id": 2,
+                "title": "Regular Gum",
+                "description": "No energy boost, just flavor",
+                "icon": "Minus", 
+                "type": "neutral"
+            },
+            {
+                "id": 3,
+                "title": "Rise Gum",
+                "description": "Clean energy, sugar-free, convenient",
+                "icon": "CheckCircle",
+                "type": "solution"
+            }
+        ],
+        "socialLinks": [
+            {"platform": "Instagram", "icon": "Instagram", "url": "#"},
+            {"platform": "Twitter", "icon": "Twitter", "url": "#"},
+            {"platform": "LinkedIn", "icon": "Linkedin", "url": "#"},
+            {"platform": "WhatsApp", "icon": "MessageCircle", "url": "#"}
+        ],
+        "contactInfo": {
+            "email": "hello@risegum.in",
+            "phone": "+91-9999-RISE-GUM",
+            "address": "Coming to campuses near you"
+        }
+    }
+    
+    return ContentResponse(
+        success=True,
+        data=content_data
+    )
 
 # Include the router in the main app
 app.include_router(api_router)
