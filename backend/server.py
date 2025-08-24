@@ -37,6 +37,59 @@ class StatusCheck(BaseModel):
 class StatusCheckCreate(BaseModel):
     client_name: str
 
+# Rise Gum Waitlist Models
+class WaitlistEntryCreate(BaseModel):
+    name: str = Field(..., min_length=1, max_length=100, description="Full name")
+    email: EmailStr = Field(..., description="Valid email address")
+    city: str = Field(..., min_length=1, max_length=50, description="City name")
+    
+    @validator('name')
+    def validate_name(cls, v):
+        if not v or not v.strip():
+            raise ValueError('Name cannot be empty')
+        # Remove extra whitespace
+        v = re.sub(r'\s+', ' ', v.strip())
+        # Check for valid characters (letters, spaces, hyphens, apostrophes)
+        if not re.match(r"^[a-zA-Z\s'-]+$", v):
+            raise ValueError('Name can only contain letters, spaces, hyphens, and apostrophes')
+        return v
+    
+    @validator('city')
+    def validate_city(cls, v):
+        if not v or not v.strip():
+            raise ValueError('City cannot be empty')
+        # Remove extra whitespace
+        v = re.sub(r'\s+', ' ', v.strip())
+        # Check for valid characters
+        if not re.match(r"^[a-zA-Z\s'-]+$", v):
+            raise ValueError('City name can only contain letters, spaces, hyphens, and apostrophes')
+        return v
+
+class WaitlistEntry(BaseModel):
+    id: str
+    name: str
+    email: str
+    city: str
+    timestamp: datetime
+    status: str = "pending"
+    source: str = "landing_page"
+
+class WaitlistResponse(BaseModel):
+    success: bool
+    data: Optional[WaitlistEntry] = None
+    message: str
+    error: Optional[str] = None
+
+class WaitlistListResponse(BaseModel):
+    success: bool
+    data: List[WaitlistEntry]
+    count: int
+
+# Static content models
+class ContentResponse(BaseModel):
+    success: bool
+    data: dict
+
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
