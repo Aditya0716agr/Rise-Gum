@@ -173,12 +173,12 @@ const RiseGumLanding = () => {
                 point.type === 'solution' ? 'border-green-200 bg-green-50' : ''
               }`}>
                 <CardContent className="p-8">
-                  <div className={`w-20 h-20 mx-auto mb-6 rounded-2xl flex items-center justify-center transition-transform duration-300 hover:scale-110 ${
-                    point.type === 'problem' ? 'bg-gradient-to-br from-red-400 to-red-600' :
+                  <div className={`w-20 h-20 mx-auto mb-6 rounded-2xl flex items-center justify-content transition-transform duration-300 hover:scale-110 ${
+                    point.type === 'problem' ? 'bg-gradient-to-br from-red-400 to-red-500' :
                     point.type === 'solution' ? 'bg-gradient-to-br from-green-400 to-green-600' : 
-                    'bg-gradient-to-br from-gray-400 to-gray-600'
+                    'bg-gradient-to-br from-gray-400 to-gray-500'
                   }`}>
-                    <div className="text-white">
+                    <div className="text-white w-full flex justify-center">
                       {getIcon(point.icon)}
                     </div>
                   </div>
