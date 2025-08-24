@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Card, CardContent } from './ui/card';
@@ -21,14 +21,15 @@ import {
   Star,
   TrendingUp
 } from 'lucide-react';
+import { waitlistAPI, contentAPI } from '../services/api';
+// Import mock data as fallback
 import { 
-  addWaitlistEntry, 
-  testimonials, 
-  socialProofStats, 
-  productBenefits,
-  problemPoints,
-  socialLinks,
-  contactInfo 
+  testimonials as mockTestimonials, 
+  socialProofStats as mockSocialProofStats, 
+  productBenefits as mockProductBenefits,
+  problemPoints as mockProblemPoints,
+  socialLinks as mockSocialLinks,
+  contactInfo as mockContactInfo 
 } from '../data/mock';
 
 const RiseGumLanding = () => {
