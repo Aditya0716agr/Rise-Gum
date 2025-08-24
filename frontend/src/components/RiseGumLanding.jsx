@@ -287,65 +287,80 @@ const RiseGumLanding = () => {
       </section>
 
       {/* CTA Section */}
-      <section id="waitlist" className="py-20 px-6">
+      <section id="waitlist" className="py-24 px-6">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="heading-2 mb-4">
-            Be the first to try Rise Gum
-          </h2>
-          <p className="body-large mb-8" style={{ color: 'var(--text-secondary)' }}>
-            Join our waitlist and get notified when we launch in your city.
-          </p>
+          <div className="fade-in">
+            <h2 className="heading-2 mb-6">
+              Be the first to try Rise Gum
+            </h2>
+            <p className="body-large mb-12" style={{ color: 'var(--text-secondary)' }}>
+              Join our waitlist and get notified when we launch in your city.
+            </p>
+          </div>
 
-          <Card className="product-card">
-            <CardContent className="p-8">
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Card className="product-card glass-morphism scale-in">
+            <CardContent className="p-10">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="relative">
+                    <Input
+                      type="text"
+                      name="name"
+                      placeholder="Your Name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="rounded-full px-6 py-4 border-2 border-gray-200 focus:border-green-400 transition-all duration-300 text-lg"
+                      required
+                    />
+                  </div>
+                  <div className="relative">
+                    <Input
+                      type="email"
+                      name="email"
+                      placeholder="Email Address"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="rounded-full px-6 py-4 border-2 border-gray-200 focus:border-green-400 transition-all duration-300 text-lg"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="relative">
                   <Input
                     type="text"
-                    name="name"
-                    placeholder="Your Name"
-                    value={formData.name}
+                    name="city"
+                    placeholder="Your City"
+                    value={formData.city}
                     onChange={handleInputChange}
-                    className="rounded-full px-4 py-3"
-                    required
-                  />
-                  <Input
-                    type="email"
-                    name="email"
-                    placeholder="Email Address"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="rounded-full px-4 py-3"
+                    className="rounded-full px-6 py-4 border-2 border-gray-200 focus:border-green-400 transition-all duration-300 text-lg"
                     required
                   />
                 </div>
-                <Input
-                  type="text"
-                  name="city"
-                  placeholder="Your City"
-                  value={formData.city}
-                  onChange={handleInputChange}
-                  className="rounded-full px-4 py-3"
-                  required
-                />
                 
                 <Button 
                   type="submit"
-                  className="btn-primary w-full py-4"
+                  className="btn-primary w-full py-5 text-lg font-semibold"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? 'Joining...' : 'Notify me when available'}
+                  {isSubmitting ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3"></div>
+                      Joining...
+                    </>
+                  ) : (
+                    'Notify me when available'
+                  )}
                 </Button>
               </form>
               
               {formStatus && (
-                <p className={`mt-4 text-sm ${
+                <div className={`mt-6 p-4 rounded-2xl ${
                   formStatus.includes('Thanks') 
-                    ? 'text-green-600' 
-                    : 'text-red-600'
-                }`}>
-                  {formStatus}
-                </p>
+                    ? 'bg-green-50 border border-green-200 text-green-800' 
+                    : 'bg-red-50 border border-red-200 text-red-800'
+                } slide-in-up`}>
+                  <p className="font-medium">{formStatus}</p>
+                </div>
               )}
             </CardContent>
           </Card>
