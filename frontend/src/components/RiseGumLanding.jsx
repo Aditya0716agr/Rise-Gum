@@ -192,23 +192,27 @@ const RiseGumLanding = () => {
       </section>
 
       {/* Solution Section */}
-      <section id="solution" className="py-20 px-6">
+      <section id="solution" className="py-24 px-6">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="heading-2 mb-4">
-            Rise Gum delivers clean energy in seconds
-          </h2>
-          <p className="body-large mb-12" style={{ color: 'var(--text-secondary)' }}>
-            Everything you need for sustained focus and energy.
-          </p>
+          <div className="fade-in">
+            <h2 className="heading-2 mb-4">
+              Rise Gum delivers clean energy in seconds
+            </h2>
+            <p className="body-large mb-16" style={{ color: 'var(--text-secondary)' }}>
+              Everything you need for sustained focus and energy.
+            </p>
+          </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {productBenefits.map((benefit) => (
-              <Card key={benefit.id} className="product-card text-center">
-                <CardContent className="p-6">
-                  <div className="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center">
-                    {getIcon(benefit.icon)}
+            {productBenefits.map((benefit, index) => (
+              <Card key={benefit.id} className={`product-card text-center scale-in animate-delay-${(index + 1) * 200}`}>
+                <CardContent className="p-8">
+                  <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-green-400 to-green-600 rounded-2xl flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110">
+                    <div className="text-white">
+                      {getIcon(benefit.icon)}
+                    </div>
                   </div>
-                  <h3 className="heading-3 mb-2">{benefit.title}</h3>
+                  <h3 className="heading-3 mb-3">{benefit.title}</h3>
                   <p className="body-small">{benefit.description}</p>
                 </CardContent>
               </Card>
