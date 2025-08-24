@@ -374,8 +374,8 @@ const RiseGumLanding = () => {
             {/* Brand */}
             <div className="fade-in">
               <div className="flex items-center space-x-3 mb-6">
-                <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-2xl flex items-center justify-center shadow-md">
-                  <span className="text-white font-bold text-lg">R</span>
+                <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-2xl flex items-center justify-center shadow-md">
+                  <span className="text-white font-bold text-xl">R</span>
                 </div>
                 <span className="font-bold text-2xl" style={{ color: 'var(--text-primary)' }}>Rise Gum</span>
               </div>
