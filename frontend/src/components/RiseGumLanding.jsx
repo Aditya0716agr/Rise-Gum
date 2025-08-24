@@ -453,13 +453,13 @@ const RiseGumLanding = () => {
                   <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
                     <Mail className="w-4 h-4 text-green-600" />
                   </div>
-                  <span className="body-small">{contactInfo.email}</span>
+                  <span className="body-small">{content.contactInfo.email}</span>
                 </div>
                 <div className="flex items-center space-x-3 hover:text-green-600 transition-colors duration-200">
                   <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
                     <Phone className="w-4 h-4 text-green-600" />
                   </div>
-                  <span className="body-small">{contactInfo.phone}</span>
+                  <span className="body-small">{content.contactInfo.phone}</span>
                 </div>
               </div>
             </div>
@@ -470,7 +470,7 @@ const RiseGumLanding = () => {
                 Follow Us
               </h4>
               <div className="flex space-x-3">
-                {socialLinks.map((link, index) => (
+                {content.socialLinks.map((link, index) => (
                   <a
                     key={link.platform}
                     href={link.url}
