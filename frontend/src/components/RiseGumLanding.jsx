@@ -222,55 +222,59 @@ const RiseGumLanding = () => {
       </section>
 
       {/* Social Proof Section */}
-      <section className="py-20 px-6" style={{ backgroundColor: 'var(--bg-section)' }}>
+      <section className="py-24 px-6" style={{ backgroundColor: 'var(--bg-section)' }}>
         <div className="max-w-4xl mx-auto text-center">
-          <div className="flex items-center justify-center gap-2 mb-6">
-            <TrendingUp className="w-6 h-6 text-green-600" />
-            <h2 className="heading-2">
-              {socialProofStats.interestedStudents}+ students already interested
-            </h2>
+          <div className="slide-in-up">
+            <div className="flex items-center justify-center gap-3 mb-8">
+              <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center animate-pulse-subtle">
+                <TrendingUp className="w-6 h-6 text-white" />
+              </div>
+              <h2 className="heading-2">
+                {socialProofStats.interestedStudents}+ students already interested
+              </h2>
+            </div>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-            <div className="text-center">
-              <div className="text-3xl font-bold" style={{ color: 'var(--accent-text)' }}>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+            <div className="text-center scale-in animate-delay-100">
+              <div className="text-4xl font-bold bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent mb-2">
                 {socialProofStats.interestedStudents}+
               </div>
               <div className="body-small">Students</div>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold" style={{ color: 'var(--accent-text)' }}>
+            <div className="text-center scale-in animate-delay-200">
+              <div className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent mb-2">
                 {socialProofStats.universities}+
               </div>
               <div className="body-small">Universities</div>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold" style={{ color: 'var(--accent-text)' }}>
+            <div className="text-center scale-in animate-delay-300">
+              <div className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-purple-400 bg-clip-text text-transparent mb-2">
                 {socialProofStats.cities}+
               </div>
               <div className="body-small">Cities</div>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold" style={{ color: 'var(--accent-text)' }}>
+            <div className="text-center scale-in animate-delay-400">
+              <div className="text-4xl font-bold bg-gradient-to-r from-orange-600 to-orange-400 bg-clip-text text-transparent mb-2">
                 {socialProofStats.growthRate}
               </div>
               <div className="body-small">Growth</div>
             </div>
           </div>
 
-          {/* Testimonial */}
-          <Card className="product-card max-w-2xl mx-auto">
-            <CardContent className="p-8">
-              <div className="flex justify-center mb-4">
+          {/* Enhanced Testimonial */}
+          <Card className="product-card max-w-2xl mx-auto glass-morphism fade-in">
+            <CardContent className="p-10">
+              <div className="flex justify-center mb-6">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 hover:scale-110 transition-transform duration-200" style={{ animationDelay: `${i * 0.1}s` }} />
                 ))}
               </div>
-              <blockquote className="body-medium mb-4 italic">
+              <blockquote className="body-large mb-6 italic font-medium">
                 "{testimonials[0].quote}"
               </blockquote>
               <div className="text-center">
-                <div className="font-semibold" style={{ color: 'var(--text-primary)' }}>
+                <div className="font-semibold text-lg mb-1" style={{ color: 'var(--text-primary)' }}>
                   {testimonials[0].name}
                 </div>
                 <div className="body-small">
