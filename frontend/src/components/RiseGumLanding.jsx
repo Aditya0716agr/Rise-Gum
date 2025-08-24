@@ -288,7 +288,7 @@ const RiseGumLanding = () => {
                 <TrendingUp className="w-6 h-6 text-white" />
               </div>
               <h2 className="heading-2">
-                {socialProofStats.interestedStudents}+ students already interested
+                {content.socialProofStats.interestedStudents}+ students already interested
               </h2>
             </div>
           </div>
@@ -296,25 +296,25 @@ const RiseGumLanding = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
             <div className="text-center scale-in animate-delay-100">
               <div className="text-4xl font-bold text-green-600 mb-2">
-                {socialProofStats.interestedStudents}+
+                {content.socialProofStats.interestedStudents}+
               </div>
               <div className="body-small">Students</div>
             </div>
             <div className="text-center scale-in animate-delay-200">
               <div className="text-4xl font-bold text-green-600 mb-2">
-                {socialProofStats.universities}+
+                {content.socialProofStats.universities}+
               </div>
               <div className="body-small">Universities</div>
             </div>
             <div className="text-center scale-in animate-delay-300">
               <div className="text-4xl font-bold text-green-600 mb-2">
-                {socialProofStats.cities}+
+                {content.socialProofStats.cities}+
               </div>
               <div className="body-small">Cities</div>
             </div>
             <div className="text-center scale-in animate-delay-400">
               <div className="text-4xl font-bold text-green-600 mb-2">
-                {socialProofStats.growthRate}
+                {content.socialProofStats.growthRate}
               </div>
               <div className="body-small">Growth</div>
             </div>
@@ -329,14 +329,14 @@ const RiseGumLanding = () => {
                 ))}
               </div>
               <blockquote className="body-large mb-6 italic font-medium">
-                "{testimonials[0].quote}"
+                "{content.testimonials[0].quote}"
               </blockquote>
               <div className="text-center">
                 <div className="font-semibold text-lg mb-1" style={{ color: 'var(--text-primary)' }}>
-                  {testimonials[0].name}
+                  {content.testimonials[0].name}
                 </div>
                 <div className="body-small">
-                  {testimonials[0].role} • {testimonials[0].city}
+                  {content.testimonials[0].role} • {content.testimonials[0].city}
                 </div>
               </div>
             </CardContent>
