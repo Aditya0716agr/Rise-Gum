@@ -237,25 +237,25 @@ const RiseGumLanding = () => {
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
             <div className="text-center scale-in animate-delay-100">
-              <div className="text-4xl font-bold bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent mb-2">
+              <div className="text-4xl font-bold text-green-600 mb-2">
                 {socialProofStats.interestedStudents}+
               </div>
               <div className="body-small">Students</div>
             </div>
             <div className="text-center scale-in animate-delay-200">
-              <div className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent mb-2">
+              <div className="text-4xl font-bold text-green-600 mb-2">
                 {socialProofStats.universities}+
               </div>
               <div className="body-small">Universities</div>
             </div>
             <div className="text-center scale-in animate-delay-300">
-              <div className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-purple-400 bg-clip-text text-transparent mb-2">
+              <div className="text-4xl font-bold text-green-600 mb-2">
                 {socialProofStats.cities}+
               </div>
               <div className="body-small">Cities</div>
             </div>
             <div className="text-center scale-in animate-delay-400">
-              <div className="text-4xl font-bold bg-gradient-to-r from-orange-600 to-orange-400 bg-clip-text text-transparent mb-2">
+              <div className="text-4xl font-bold text-green-600 mb-2">
                 {socialProofStats.growthRate}
               </div>
               <div className="body-small">Growth</div>
