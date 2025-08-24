@@ -40,39 +40,96 @@ const RiseGumLanding = () => {
   });
   const [formStatus, setFormStatus] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  // State for dynamic content
+  const [content, setContent] = useState({
+    testimonials: mockTestimonials,
+    socialProofStats: mockSocialProofStats,
+    productBenefits: mockProductBenefits,
+    problemPoints: mockProblemPoints,
+    socialLinks: mockSocialLinks,
+    contactInfo: mockContactInfo
+  });
+  const [contentLoaded, setContentLoaded] = useState(false);
+
+  // Load content from API on component mount
+  useEffect(() => {
+    const loadContent = async () => {
+      try {
+        const result = await contentAPI.getContent();
+        if (result.success) {
+          setContent(result.data);
+          setContentLoaded(true);
+        } else {
+          console.warn('Failed to load content from API, using mock data');
+          setContentLoaded(true);
+        }
+      } catch (error) {
+        console.error('Error loading content:', error);
+        setContentLoaded(true);
+      }
+    };
+
+    loadContent();
+  }, []);
 
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+    // Clear any previous error messages when user starts typing
+    if (formStatus && !formStatus.includes('Thanks')) {
+      setFormStatus('');
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
     // Basic validation
-    if (!formData.name || !formData.email || !formData.city) {
+    if (!formData.name.trim() || !formData.email.trim() || !formData.city.trim()) {
       setFormStatus('Please fill in all fields');
       return;
     }
 
-    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
       setFormStatus('Please enter a valid email address');
       return;
     }
 
     setIsSubmitting(true);
+    setFormStatus('');
     
     try {
-      // Add to mock storage
-      const entry = addWaitlistEntry(formData);
-      console.log('Waitlist entry added:', entry);
-      
-      setFormStatus('Thanks! We\'ll notify you when Rise Gum launches.');
-      setFormData({ name: '', email: '', city: '' });
+      // Call backend API
+      const result = await waitlistAPI.addEntry({
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        city: formData.city.trim()
+      });
+
+      if (result.success) {
+        setFormStatus(result.message);
+        setFormData({ name: '', email: '', city: '' });
+        console.log('Waitlist entry added successfully:', result.data);
+      } else {
+        // Handle specific error cases
+        if (result.error.includes('already registered')) {
+          setFormStatus('This email is already on our waitlist! We\'ll be in touch soon.');
+        } else if (result.details && result.details.length > 0) {
+          // Handle validation errors
+          const fieldErrors = result.details.map(detail => detail.message).join(', ');
+          setFormStatus(`Please check: ${fieldErrors}`);
+        } else {
+          setFormStatus(result.error || 'Something went wrong. Please try again.');
+        }
+      }
     } catch (error) {
-      setFormStatus('Something went wrong. Please try again.');
+      console.error('Form submission error:', error);
+      setFormStatus('Network error. Please check your connection and try again.');
     } finally {
       setIsSubmitting(false);
     }
