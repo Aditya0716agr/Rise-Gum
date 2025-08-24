@@ -416,7 +416,7 @@ const RiseGumLanding = () => {
                   <a
                     key={link.platform}
                     href={link.url}
-                    className="w-12 h-12 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center hover:from-green-400 hover:to-green-600 hover:text-white transition-all duration-300 hover:scale-110 hover:shadow-lg"
+                    className="w-12 h-12 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center hover:from-green-400 hover:to-green-500 hover:text-white transition-all duration-300 hover:scale-110 hover:shadow-lg"
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
                     {getIcon(link.icon)}
