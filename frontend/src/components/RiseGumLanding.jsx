@@ -122,23 +122,33 @@ const RiseGumLanding = () => {
             Clean energy that fits in your pocket.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Button className="btn-primary text-lg px-8 py-4">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+            <Button className="btn-primary text-lg px-8 py-4 animate-pulse-subtle">
               Join Waitlist <Mail className="w-5 h-5 ml-2" />
             </Button>
-            <Button className="btn-secondary text-lg px-8 py-4">
+            <Button className="btn-secondary text-lg px-8 py-4 hover:shadow-lg transition-all duration-300">
               Learn More
             </Button>
           </div>
 
-          {/* Hero Image Placeholder */}
-          <div className="w-full max-w-md mx-auto h-64 bg-gray-100 rounded-2xl flex items-center justify-center border-2 border-dashed border-gray-300">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full mx-auto mb-3 flex items-center justify-center">
-                <Zap className="w-8 h-8 text-green-600" />
+          {/* Floating Energy Icons Animation */}
+          <div className="relative w-full max-w-2xl mx-auto h-32 overflow-hidden">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="floating-icon floating-icon-1">
+                <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-2xl flex items-center justify-center shadow-lg">
+                  <Zap className="w-8 h-8 text-white" />
+                </div>
               </div>
-              <p className="text-gray-500 text-sm">Hero Image Placeholder</p>
-              <p className="text-gray-400 text-xs">Young Indian student with gum pack</p>
+              <div className="floating-icon floating-icon-2">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center shadow-md">
+                  <Clock className="w-6 h-6 text-white" />
+                </div>
+              </div>
+              <div className="floating-icon floating-icon-3">
+                <div className="w-14 h-14 bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl flex items-center justify-center shadow-md">
+                  <Heart className="w-7 h-7 text-white" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
